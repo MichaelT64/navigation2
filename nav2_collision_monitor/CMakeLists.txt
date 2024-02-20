@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(nav2_collision_monitor)
 
+add_compile_definitions( humble )
+
 ### Dependencies ###
 
 find_package(ament_cmake REQUIRED)
