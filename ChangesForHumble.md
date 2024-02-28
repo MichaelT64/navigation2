@@ -1,0 +1,77 @@
+# Changes made for ROS2 Humble
+
+This describes the manual changes which ware made to get the main branch of Navigation2 compinling and running.
+
+## Used commit from Nav2 branch
+
+CI green P3 (#4117) (a3cdbbf7d0a9be9ec50f876ab365a45eff2214d9)
+
+## Disclaimer
+
+Due to limited resources of time and knowledge I can't check every functionality of Nav2.
+
+The first goal is to get the packages build without errors by adapting Rolling functionality to Humble functionality as near as possible.
+
+The second goal is to use these functionality in my ROS2 Humble project.
+
+## Changes made
+
+### CMakelists.txt
+- add "humble" as PreProcessor variable where necessary
+```
+    add_compile_definitions( humble )
+```
+
+
+- There is no gazebo_ros_pkgs package for Raspberry PI (aarch64), so disable the tests if the host system has this architecture:
+package "nav2_system_tests" 
+```
+    if( ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "arm64" )
+```
+
+### Launch files
+- "PushROSNamespace" becomes "PushRosNamespace"
+                    
+- "NotEqualsSubstitution" does not exist in  Humble so it was substituted by "PythonExpression(['"" != "', LaunchConfiguration('map'), '"'])"
+E.g.
+ ```
+    # condition=IfCondition(
+    #     NotEqualsSubstitution(LaunchConfiguration('map'), '')
+    # ),
+    condition=IfCondition(
+        PythonExpression(['"" != "', LaunchConfiguration('map'), '"'])
+    ),
+
+ ```
+
+### CPP Code
+
+- use "cv_bridge/cv_bridge.h" instead of "cv_bridge/cv_bridge.hpp"
+- rewrite some functions in "nav2_util" ("setSoftRealTimePriority()", "copy_all_parameters()")
+- use "rclcpp::ServicesQoS().get_rmw_qos_profile()" instead of "rclcpp::SystemDefaultsQoS()"
+- use "create_wall_timer" instead of "create_timer"
+```
+#ifdef humble
+#include "cv_bridge/cv_bridge.h"
+#else
+#include "cv_bridge/cv_bridge.hpp"
+#endif
+```
+
+## ToDos
+
+- [ ] formatting regarding to Nav2 conventions
+- [ ] more tests
+- [ ] use environment variable in CMake
+- [ ] use if condition in Python
+
+## What was tested so far?
+
+- building of Nav2 with Humble distro on a PC ("x86_64" processor)
+- building of Nav2 with Humble distro on a Raspberry PI 4 ("aarch64" processor) - except tests because gazebo_ros_pkgs is not available for "aarch64"
+- using CollisionMonitor in simulation with Gazebo Classic
+
+## Motivation
+
+Usage of Nav2 collision monitor for my robot which use Humble.
+After trying a backport from main branch to Humble branch which was out of my possibilities, I remembered that software which I used in my early days of computing (Emacs) came with a bundle of compiler options and configuration options at build time. So I decided to try that way ...
