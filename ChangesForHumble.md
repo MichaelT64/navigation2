@@ -2,10 +2,13 @@
 
 This describes the manual changes which ware made to get the main branch of Navigation2 compinling and running.
 
-## Used commit from Nav2 branch
+## Synchroinized commits from Nav2 main branch
 
-Stop planner if the goal is cancelled (#4148) (211273f831108a767a42ccc8bfc5d5de50761cc1)
-CI green P3 (#4117) (a3cdbbf7d0a9be9ec50f876ab365a45eff2214d9)
+|    Date    | Comment | Issue | Commit Hash |
+| ---------- | ------- | ----- | ----------- |
+| 2024-03-07 | Fix BT.CPP import    | #4165 | 26363716536425ff6479610c18639c853e7537be |
+| 2024-03-07 | Stop planner if the goal is cancelled | #4148 | 211273f831108a767a42ccc8bfc5d5de50761cc1 |
+| 2024-03-01 | CI green P3 | #4117 | a3cdbbf7d0a9be9ec50f876ab365a45eff2214d9 |
 
 ## Disclaimer
 
