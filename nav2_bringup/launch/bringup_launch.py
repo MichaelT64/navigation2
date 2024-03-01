@@ -27,7 +27,11 @@ from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import Node
-from launch_ros.actions import PushROSNamespace
+
+if os.getenv('ROS_DISTRO') == 'humble':
+    from launch_ros.actions import PushRosNamespace
+else:
+    from launch_ros.actions import PushROSNamespace
 from launch_ros.descriptions import ParameterFile
 from nav2_common.launch import ReplaceString, RewrittenYaml
 
@@ -133,10 +137,28 @@ def generate_launch_description():
         'log_level', default_value='info', description='log level'
     )
 
+    if os.getenv('ROS_DISTRO') == 'humble':
+        namespaceAction = PushRosNamespace(
+            condition=IfCondition(use_namespace), namespace=namespace
+        )
+    else:
+        namespaceAction = PushROSNamespace(
+            condition=IfCondition(use_namespace), namespace=namespace
+        )
+
+    if os.getenv('ROS_DISTRO') == 'humble':
+        namespaceAction = PushRosNamespace(
+            condition=IfCondition(use_namespace), namespace=namespace
+        )
+    else:
+        namespaceAction = PushROSNamespace(
+            condition=IfCondition(use_namespace), namespace=namespace
+        )
+
     # Specify the actions
     bringup_cmd_group = GroupAction(
         [
-            PushROSNamespace(condition=IfCondition(use_namespace), namespace=namespace),
+            namespaceAction,
             Node(
                 condition=IfCondition(use_composition),
                 name='nav2_container',
