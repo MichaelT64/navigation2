@@ -20,10 +20,11 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction
 from launch.actions import SetEnvironmentVariable
 from launch.conditions import IfCondition
-from launch.substitutions import EqualsSubstitution
 from launch.substitutions import LaunchConfiguration, PythonExpression
 
-# from launch.substitutions import NotEqualsSubstitution
+if os.getenv('ROS_DISTRO') != 'humble':
+    from launch.substitutions import NotEqualsSubstitution
+    from launch.substitutions import EqualsSubstitution
 from launch_ros.actions import LoadComposableNodes, SetParameter
 from launch_ros.actions import Node
 from launch_ros.descriptions import ComposableNode, ParameterFile
@@ -117,14 +118,26 @@ def generate_launch_description():
         'log_level', default_value='info', description='log level'
     )
 
+    if os.getenv('ROS_DISTRO') == 'humble':
+        mapNotEqualsCondition = IfCondition(
+            PythonExpression(['"" != "', LaunchConfiguration('map'), '"'])
+        )
+        mapEqualsCondition = IfCondition(
+            PythonExpression(['"" == "', LaunchConfiguration('map'), '"'])
+        )
+    else:
+        mapNotEqualsCondition = IfCondition(
+            NotEqualsSubstitution(LaunchConfiguration('map'), '')
+        )
+        mapEqualsCondition = IfCondition(
+            EqualsSubstitution(LaunchConfiguration('map'), '')
+        )
     load_nodes = GroupAction(
         condition=IfCondition(PythonExpression(['not ', use_composition])),
         actions=[
             SetParameter('use_sim_time', use_sim_time),
             Node(
-                condition=IfCondition(
-                    EqualsSubstitution(LaunchConfiguration('map'), '')
-                ),
+                mapEqualsCondition,
                 package='nav2_map_server',
                 executable='map_server',
                 name='map_server',
@@ -136,12 +149,7 @@ def generate_launch_description():
                 remappings=remappings,
             ),
             Node(
-                # condition=IfCondition(
-                #     NotEqualsSubstitution(LaunchConfiguration('map'), '')
-                # ),
-                condition=IfCondition(
-                    PythonExpression(['"" != "', LaunchConfiguration('map'), '"'])
-                ),
+                condition=mapNotEqualsCondition,
                 package='nav2_map_server',
                 executable='map_server',
                 name='map_server',
@@ -184,9 +192,7 @@ def generate_launch_description():
             SetParameter('use_sim_time', use_sim_time),
             LoadComposableNodes(
                 target_container=container_name_full,
-                condition=IfCondition(
-                    EqualsSubstitution(LaunchConfiguration('map'), '')
-                ),
+                condition=mapEqualsCondition,
                 composable_node_descriptions=[
                     ComposableNode(
                         package='nav2_map_server',
@@ -199,12 +205,7 @@ def generate_launch_description():
             ),
             LoadComposableNodes(
                 target_container=container_name_full,
-                # condition=IfCondition(
-                #     NotEqualsSubstitution(LaunchConfiguration('map'), '')
-                # ),
-                condition=IfCondition(
-                    PythonExpression(['"" != "', LaunchConfiguration('map'), '"'])
-                ),
+                condition=mapNotEqualsCondition,
                 composable_node_descriptions=[
                     ComposableNode(
                         package='nav2_map_server',

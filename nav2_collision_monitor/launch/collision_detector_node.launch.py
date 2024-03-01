@@ -23,10 +23,14 @@ from launch.actions import DeclareLaunchArgument, GroupAction
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, PythonExpression
 
-# from launch.substitutions import NotEqualsSubstitution
+if os.getenv('ROS_DISTRO') == 'humble':
+    from launch_ros.actions import PushRosNamespace
+else:
+    from launch.substitutions import NotEqualsSubstitution
+    from launch_ros.actions import PushROSNamespace
+
 from launch_ros.actions import LoadComposableNodes, SetParameter
 from launch_ros.actions import Node
-from launch_ros.actions import PushRosNamespace
 from launch_ros.descriptions import ComposableNode
 from nav2_common.launch import RewrittenYaml
 
@@ -87,20 +91,27 @@ def generate_launch_description():
         convert_types=True,
     )
 
+    if os.getenv('ROS_DISTRO') == 'humble':
+        namespaceAction = PushRosNamespace(
+            condition=IfCondition(
+                PythonExpression(['"" != "', LaunchConfiguration('namespace'), '"'])
+            ),
+            namespace=namespace,
+        )
+    else:
+        namespaceAction = PushROSNamespace(
+            condition=IfCondition(
+                NotEqualsSubstitution(LaunchConfiguration('namespace'), '')
+            ),
+            namespace=namespace,
+        )
+
     # Declare node launching commands
     load_nodes = GroupAction(
         condition=IfCondition(PythonExpression(['not ', use_composition])),
         actions=[
             SetParameter('use_sim_time', use_sim_time),
-            PushRosNamespace(
-                # condition=IfCondition(
-                #     NotEqualsSubstitution(LaunchConfiguration('namespace'), '')
-                # ),
-                condition=IfCondition(
-                    PythonExpression(['"" != "', LaunchConfiguration('namespace'), '"'])
-                ),
-                namespace=namespace,
-            ),
+            namespaceAction,
             Node(
                 package='nav2_lifecycle_manager',
                 executable='lifecycle_manager',
@@ -125,15 +136,7 @@ def generate_launch_description():
         condition=IfCondition(use_composition),
         actions=[
             SetParameter('use_sim_time', use_sim_time),
-            PushRosNamespace(
-                # condition=IfCondition(
-                #     NotEqualsSubstitution(LaunchConfiguration('namespace'), '')
-                # ),
-                condition=IfCondition(
-                    PythonExpression(['"" != "', LaunchConfiguration('namespace'), '"'])
-                ),
-                namespace=namespace,
-            ),
+            namespaceAction,
             LoadComposableNodes(
                 target_container=container_name_full,
                 composable_node_descriptions=[
