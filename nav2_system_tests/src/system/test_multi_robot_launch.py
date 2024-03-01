@@ -28,7 +28,12 @@ from launch.actions import (
 )
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import TextSubstitution
-from launch_ros.actions import Node, PushROSNamespace
+from launch_ros.actions import Node
+
+if os.getenv('ROS_DISTRO') == 'humble':
+    from launch_ros.actions import PushRosNamespace
+else:
+    from launch_ros.actions import PushROSNamespace
 
 from launch_testing.legacy import LaunchTestService
 
@@ -121,11 +126,15 @@ def generate_launch_description():
     nav_instances_cmds = []
     for robot in robots:
         params_file = eval(f"{robot['name']}_params_file")
+        if os.getenv('ROS_DISTRO') == 'humble':
+            namespaceAction = (PushRosNamespace(robot['name']),)
+        else:
+            namespaceAction = (PushROSNamespace(robot['name']),)
 
         group = GroupAction(
             [
                 # Instances use the robot's name for namespace
-                PushROSNamespace(robot['name']),
+                namespaceAction,
                 IncludeLaunchDescription(
                     PythonLaunchDescriptionSource(
                         os.path.join(bringup_dir, 'launch', 'bringup_launch.py')
