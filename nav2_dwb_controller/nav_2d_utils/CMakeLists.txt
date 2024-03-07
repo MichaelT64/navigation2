@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(nav_2d_utils)
 
+add_compile_definitions( humble )
+
 find_package(ament_cmake REQUIRED)
 find_package(nav2_common REQUIRED)
 find_package(geometry_msgs REQUIRED)
