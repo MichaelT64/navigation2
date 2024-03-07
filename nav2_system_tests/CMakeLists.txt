@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.5)
 project(nav2_system_tests)
 
 find_package(ament_cmake REQUIRED)
+
+#if( ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "x86_64" )
+if( ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "aarch64" )
+else()
+
 find_package(nav2_common REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
@@ -129,4 +134,7 @@ endif()
 ament_export_libraries(${local_controller_plugin_lib})
 ament_export_libraries(${global_planner_plugin_lib})
 ament_export_libraries(${smoother_plugin_lib})
+
+endif()
+
 ament_package()
