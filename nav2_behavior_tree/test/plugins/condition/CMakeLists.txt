@@ -1,3 +1,5 @@
+add_compile_definitions( humble )
+
 ament_add_gtest(test_condition_distance_traveled test_distance_traveled.cpp)
 target_link_libraries(test_condition_distance_traveled nav2_distance_traveled_condition_bt_node)
 ament_target_dependencies(test_condition_distance_traveled ${dependencies})

@@ -1,3 +1,5 @@
+add_compile_definitions( humble )
+
 ament_add_gtest(test_bt_utils test_bt_utils.cpp)
 ament_target_dependencies(test_bt_utils ${dependencies})
 

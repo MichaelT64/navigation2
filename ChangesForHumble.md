@@ -4,6 +4,7 @@ This describes the manual changes which ware made to get the main branch of Navi
 
 ## Used commit from Nav2 branch
 
+Stop planner if the goal is cancelled (#4148) (211273f831108a767a42ccc8bfc5d5de50761cc1)
 CI green P3 (#4117) (a3cdbbf7d0a9be9ec50f876ab365a45eff2214d9)
 
 ## Disclaimer
