@@ -1,3 +1,5 @@
+add_compile_definitions( $ENV{ROS_DISTRO} )
+
 find_package(test_msgs REQUIRED)
 
 ament_add_gtest(test_bt_action_node test_bt_action_node.cpp)
