@@ -3,6 +3,8 @@ project(nav2_system_tests)
 
 find_package(ament_cmake REQUIRED)
 
+find_package(ament_cmake REQUIRED)
+
 #if( ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "x86_64" )
 if( ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "aarch64" )
 else()
