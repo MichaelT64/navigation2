@@ -6,6 +6,8 @@ This describes the manual changes which ware made to get the main branch of Navi
 
 |    Date    | Comment | Issue | Commit Hash |
 | ---------- | ------- | ----- | ----------- |
+| 2024-03-11 | nav2_controller: add loop rate log | #4171 | 47374622dee01a27e5f9b8ae08f3d19a15de9b3a |
+| 2024-03-08 | Update default recommendation from Obstacles to Cost critic in MPPI | #4170 | c9d9b5c698d1f5aff060806481d18ba7e9b18cb2 |
 | 2024-03-07 | Fix BT.CPP import    | #4165 | 26363716536425ff6479610c18639c853e7537be |
 | 2024-03-07 | Stop planner if the goal is cancelled | #4148 | 211273f831108a767a42ccc8bfc5d5de50761cc1 |
 | 2024-03-01 | CI green P3 | #4117 | a3cdbbf7d0a9be9ec50f876ab365a45eff2214d9 |
