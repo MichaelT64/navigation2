@@ -3,11 +3,12 @@ project(nav2_system_tests)
 
 set(CMAKE_VERBOSE_MAKEFILE on)
 
+find_package(ament_cmake REQUIRED)
+
 #if( ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "x86_64" )
 if( ${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL "aarch64" )
 else()
 
-find_package(ament_cmake REQUIRED)
 find_package(nav2_common REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
