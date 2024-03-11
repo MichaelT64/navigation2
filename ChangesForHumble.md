@@ -7,6 +7,7 @@ This describes the manual changes which ware made to get the main branch of Navi
 |    Date    | Comment | Issue | Commit Hash |
 | ---------- | ------- | ----- | ----------- |
 <<<<<<< HEAD
+<<<<<<< HEAD
 | 2024-03-28 | Improving stability of action feedback | #4225 | 63b6d908456e8b421f82b8790c9b55cb82515ec3 |
 | 2024-03-28 | allowing costmap to change with new costmap resolutions | #4223 | 6f5bb6bc14a63a8d53286725f39570f6a5180678 |
 | 2024-03-28 | add polygon_subscribe_transient_local parameter in collision monitor | #4207 | 0b22bb48b3265feca2d460b2095729f9149f18f6 |
@@ -31,6 +32,8 @@ This describes the manual changes which ware made to get the main branch of Navi
 | 2024-03-08 | Update default recommendation from Obstacles to Cost critic in MPPI | #4170 | c9d9b5c698d1f5aff060806481d18ba7e9b18cb2 |
 | 2024-03-07 | Fix BT.CPP import | #4165 | 26363716536425ff6479610c18639c853e7537be |
 =======
+=======
+>>>>>>> 8bf0fab1 (add entry for new sync)
 | 2024-03-11 | nav2_controller: add loop rate log | #4171 | 47374622dee01a27e5f9b8ae08f3d19a15de9b3a |
 | 2024-03-08 | Update default recommendation from Obstacles to Cost critic in MPPI | #4170 | c9d9b5c698d1f5aff060806481d18ba7e9b18cb2 |
 | 2024-03-07 | Fix BT.CPP import    | #4165 | 26363716536425ff6479610c18639c853e7537be |
