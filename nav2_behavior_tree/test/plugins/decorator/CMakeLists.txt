@@ -1,4 +1,4 @@
-add_compile_definitions( humble )
+add_compile_definitions( $ENV{ROS_DISTRO} )
 
 ament_add_gtest(test_decorator_distance_controller test_distance_controller.cpp)
 target_link_libraries(test_decorator_distance_controller nav2_distance_controller_bt_node)

@@ -1,4 +1,4 @@
-add_compile_definitions( humble )
+add_compile_definitions( $ENV{ROS_DISTRO} )
 
 find_package(test_msgs REQUIRED)
 

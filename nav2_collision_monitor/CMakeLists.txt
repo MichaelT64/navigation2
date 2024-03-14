@@ -3,7 +3,7 @@ project(nav2_collision_monitor)
 
 ### Dependencies ###
 
-add_compile_definitions( humble )
+add_compile_definitions( $ENV{ROS_DISTRO} )
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
