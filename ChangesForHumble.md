@@ -6,6 +6,11 @@ This describes the manual changes which ware made to get the main branch of Navi
 
 |    Date    | Comment | Issue | Commit Hash |
 | ---------- | ------- | ----- | ----------- |
+| 2024-03-21 | Update footprint iif changed | #4193 | 12292d17c5db73b1fb387d30c0c426415ff2defe |
+| 2024-03-20 | Fix typo | #4196 | 2eb99e31ab747662932033b5d29950b6cdc7f690 |
+| 2024-03-19 | Move lines for pre-computation to outside a loop | #4191 | 914d881f6e154d8d7bb1975892d4642eaf4c7366 |
+| 2024-03-19 | AMCL: Set an initial guess by service call | #4182 | f484b0970327906d54b0e049326d645c8810e126 |
+| 2024-03-19 | fix typos in description messages | #4188 | aa849aede4fd9d230220d196a277b171b4f7c557 |
 | 2024-03-17 | RPP Dexory tweaks | #4140 | db974ea91b1eb01d7abf094aad511c0f2306d55f |
 | 2024-03-17 | Fixing a typo in Smac Heuristic | #4184 | 53f1f4289fb8f5630c4e22ba5b57ceb9c0c25ff6 |
 | 2024-03-15 | replace throw-error with error-log to avoid UAF mentioned in | #4175 (#4180) | 9f13cb1b29ca14c11bcbe11ab02d35c71f35de9d |
