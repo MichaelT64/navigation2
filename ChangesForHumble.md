@@ -6,6 +6,9 @@ This describes the manual changes which ware made to get the main branch of Navi
 
 |    Date    | Comment | Issue | Commit Hash |
 | ---------- | ------- | ----- | ----------- |
+| 2024-04-02 | Add API to gracefully cancel a controller | #4136 | 2ecc91e47bb09485289531144ab9b038f4cfc432 |
+| 2024-04-02 | Attempt to fix Rolling 22.04 CI Until 24.04 Comes of Age | #4229 | 80bb5bff1488c0677efcc4254b7a89908c853ba0 |
+| 2024-04-02 | nav2_controller: add loop rate log | #4228 | 19e3f46a614cfbed5ee431f3b08d38c720660dda |
 | 2024-03-28 | Improving stability of action feedback | #4225 | 63b6d908456e8b421f82b8790c9b55cb82515ec3 |
 | 2024-03-28 | allowing costmap to change with new costmap resolutions | #4223 | 6f5bb6bc14a63a8d53286725f39570f6a5180678 |
 | 2024-03-28 | add polygon_subscribe_transient_local parameter in collision monitor | #4207 | 0b22bb48b3265feca2d460b2095729f9149f18f6 |
