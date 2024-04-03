@@ -27,6 +27,7 @@ from launch.conditions import IfCondition
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import Node
+from launch import LaunchService
 
 if os.getenv('ROS_DISTRO') == 'humble':
     from launch_ros.actions import PushRosNamespace
@@ -134,17 +135,8 @@ def generate_launch_description():
     )
 
     declare_log_level_cmd = DeclareLaunchArgument(
-        'log_level', default_value='info', description='log level'
+        'log_level', default_value='warn', description='log level'
     )
-
-    if os.getenv('ROS_DISTRO') == 'humble':
-        namespaceAction = PushRosNamespace(
-            condition=IfCondition(use_namespace), namespace=namespace
-        )
-    else:
-        namespaceAction = PushROSNamespace(
-            condition=IfCondition(use_namespace), namespace=namespace
-        )
 
     if os.getenv('ROS_DISTRO') == 'humble':
         namespaceAction = PushRosNamespace(
@@ -180,6 +172,7 @@ def generate_launch_description():
                     'autostart': autostart,
                     'use_respawn': use_respawn,
                     'params_file': params_file,
+                    'log_level': log_level,
                 }.items(),
             ),
             IncludeLaunchDescription(
@@ -196,7 +189,8 @@ def generate_launch_description():
                     'use_composition': use_composition,
                     'use_respawn': use_respawn,
                     'container_name': 'nav2_container',
-                }.items(),
+                    'log_level': log_level,
+                  }.items(),
             ),
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
@@ -210,7 +204,8 @@ def generate_launch_description():
                     'use_composition': use_composition,
                     'use_respawn': use_respawn,
                     'container_name': 'nav2_container',
-                }.items(),
+                    'log_level': log_level,
+               }.items(),
             ),
         ]
     )
@@ -237,3 +232,13 @@ def generate_launch_description():
     ld.add_action(bringup_cmd_group)
 
     return ld
+
+def main():
+    ls = LaunchService()
+    ld = generate_launch_description()
+    ls.include_launch_description(ld)
+    return ls.run()
+
+
+if __name__ == '__main__':
+    main()
