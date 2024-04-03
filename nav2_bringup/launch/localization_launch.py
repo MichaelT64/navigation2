@@ -137,7 +137,7 @@ def generate_launch_description():
         actions=[
             SetParameter('use_sim_time', use_sim_time),
             Node(
-                mapEqualsCondition,
+                condition=mapEqualsCondition,
                 package='nav2_map_server',
                 executable='map_server',
                 name='map_server',
