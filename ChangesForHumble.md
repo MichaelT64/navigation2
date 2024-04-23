@@ -6,6 +6,13 @@ This describes the manual changes which ware made to get the main branch of Navi
 
 |    Date    | Comment | Issue | Commit Hash |
 | ---------- | ------- | ----- | ----------- |
+| 2024-04-23 | Completing #4259 | #4273 | 677e6accb3aea9380678da7d623b3387578d3549 |
+| 2024-04-23 | Implement Critic for Velocity Deadband Hardware Constraints | #4256 | 12c786f8b8c533b0c4adc1a38c08021c90bfcba3 |
+| 2024-04-23 | Set start and goal as float | #4255 | cc2b696e5b512ca3b1e0e175bdd1cbccb265ff91 |
+| 2024-04-23 | Smac Planner Optimizations; 9.1% improvement in speed | #4257 | c09708845e2327dfee1dac7d0a874fd9bf7f2598 |
+| 2024-04-23 | Add expanding the ~/ to the full home dir of user in the path to the map yaml. | #4258 | 61a774be41fc236738ed7c103ba806be07b0914e |
+| 2024-04-23 | Fix compiler warning ‘error_level’ may be used uninitialized | #4253 | 8af70abb35e6f93a0e6e6827c7bc3ad364b33d4b |
+| 2024-04-23 | Scale cost critic's weight when dynamically updated | #4246 | f815e8bd8e3826603e97749bb31a3145268de023 |
 | 2024-04-02 | Adding config file for DWB to exercise in system tests from MPPI default migration | #4236 | 0be2f25782413677fedc58ea090c6ecfa8b9a6b8 |
 | 2024-04-02 | Increasing test count from timeout handling changes | #4234 | d030ea463b40276277f53803b587cd3934f30075 | 
 | 2024-04-02 | Nacho/cleanup get transform util | #4181 | 911555a5ad7f6b7e90c1b25b5f9f0ce5cddc3c2e |
