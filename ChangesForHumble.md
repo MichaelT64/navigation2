@@ -6,6 +6,36 @@ This describes the manual changes which ware made to get the main branch of Navi
 
 |    Date    | Comment | Issue | Commit Hash |
 | ---------- | ------- | ----- | ----------- |
+| 2024-06-03 | Add configure and cleanup transitions to lifecycle manager and client | (#4371)
+| 2024-06-03 | adding final pose in analytic expansion to check | (#4353)
+| 2024-06-03 | Move projectState after getPointsInside | (#4356)
+| 2024-06-03 | Remove flaky spin test that needs to be rewritten | (#4348)
+| 2024-06-03 | [LifecycleManagerClient] clean set_initial_pose and navigate_to_pose | (#4346)
+| 2024-06-03 | Update path_longer_on_approach.cpp | (#4344)
+| 2024-06-03 | [LifecycleNode] add bond_heartbeat_period | (#4342)
+| 2024-06-03 | Update README.md
+| 2024-06-03 | Update CircleCI badge on readme table
+| 2024-06-03 | Update docker workflow readme badge URL
+| 2024-06-03 | 4320: Changed precision of calculations of the HybridNode MotionTable::getClosestAngularBin. | (#4324)
+| 2024-06-03 | msg validation check for /initialpose in nav2_amcl | (#4301)
+| 2024-06-03 | Fix undefined symbols in libpf_lib.so | (#4312)
+| 2024-06-03 | complete navigation.ros.org -> docs.nav2.org migration | (#4313)
+| 2024-06-03 | updating readme links to the new domain | (#4311)
+| 2024-06-03 | Continuation of #4284 | (#4295)
+| 2024-06-03 | fixes the issue when the decorator goes to idle state | (#4300)
+| 2024-06-03 | Fix #4268 | (#4296)
+| 2024-06-03 | Add footprint clearing for static layer | (#4282)
+| 2024-06-03 | ruff rule F601 - Dictionary key literal 'use_composition' repeated | (#4293)
+| 2024-06-03 | [RotationShimController] rotate also on short paths | (#4290)
+| 2024-06-03 | nav2_waypoint_follower: Fix opencv includes | (#4287)
+| 2024-06-03 | provide message validation check API | (#4276)
+| 2024-06-03 | Ignore warnings in included xtensor library | (#4285)
+| 2024-06-03 | Collision monitor: Add polygon source | (#4275)
+| 2024-06-03 | removing clearable layer param (unused) | (#4280)
+| 2024-06-03 | Make rviz use sim time with TB3 demo | (#4274)
+| 2024-06-03 | Fix some warnings on GCC13/Ubuntu 24.04 | (#4265)
+| 2024-06-03 | [Collision monitor] Dynamic radius for circle polygon | (#4226)
+| 2024-06-03 | Revert "Revert "adding base footprint publisher to nav2_util (#3860) (#3994) | (#3995)
 | 2024-04-23 | Completing #4259 | #4273 | 677e6accb3aea9380678da7d623b3387578d3549 |
 | 2024-04-23 | Implement Critic for Velocity Deadband Hardware Constraints | #4256 | 12c786f8b8c533b0c4adc1a38c08021c90bfcba3 |
 | 2024-04-23 | Set start and goal as float | #4255 | cc2b696e5b512ca3b1e0e175bdd1cbccb265ff91 |
@@ -115,6 +145,13 @@ E.g.
 #include "cv_bridge/cv_bridge.hpp"
 #endif
 ```
+
+ - add PolygonInstance Message in nav2_msgs
+ - add PolygonInstanceStamped Message in nav2_msgs
+
+## Restrictions
+
+- BaseFootprintPublisherListener does not work (files are deleted)
 
 ## ToDos
 

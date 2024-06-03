@@ -31,10 +31,14 @@ add_executable(lifecycle_bringup
 )
 target_link_libraries(lifecycle_bringup ${library_name})
 
+if( $ENV{ROS_DISTRO} STREQUAL "humble" )
+else()
+
 add_executable(base_footprint_publisher
   base_footprint_publisher.cpp
 )
 target_link_libraries(base_footprint_publisher ${library_name})
+endif()
 
 find_package(Boost REQUIRED COMPONENTS program_options)
 

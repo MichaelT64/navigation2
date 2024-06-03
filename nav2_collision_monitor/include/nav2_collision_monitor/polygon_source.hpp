@@ -19,7 +19,13 @@
 #include <vector>
 #include <string>
 
+#ifdef humble
+#define POLYGON_INST_MSGS_PKG nav2_msgs
+#include "nav2_msgs/msg/polygon_instance_stamped.hpp"
+#else
 #include "geometry_msgs/msg/polygon_instance_stamped.hpp"
+#define POLYGON_INST_MSGS_PKG geometry_msgs
+#endif
 #include "geometry_msgs/msg/polygon_stamped.hpp"
 
 #include "nav2_collision_monitor/source.hpp"
@@ -96,15 +102,17 @@ protected:
    * @brief PolygonSource data callback
    * @param msg Shared pointer to PolygonSource message
    */
-  void dataCallback(geometry_msgs::msg::PolygonInstanceStamped::ConstSharedPtr msg);
+
+
+  void dataCallback(POLYGON_INST_MSGS_PKG::msg::PolygonInstanceStamped::ConstSharedPtr msg);
 
   // ----- Variables -----
 
   /// @brief PolygonSource data subscriber
-  rclcpp::Subscription<geometry_msgs::msg::PolygonInstanceStamped>::SharedPtr data_sub_;
+  rclcpp::Subscription<POLYGON_INST_MSGS_PKG::msg::PolygonInstanceStamped>::SharedPtr data_sub_;
 
   /// @brief Latest data obtained
-  std::vector<geometry_msgs::msg::PolygonInstanceStamped> data_;
+  std::vector<POLYGON_INST_MSGS_PKG::msg::PolygonInstanceStamped> data_;
 
   /// @brief distance between sampled points on polygon edges
   double sampling_distance_;

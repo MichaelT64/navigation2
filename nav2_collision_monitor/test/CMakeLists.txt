@@ -1,3 +1,5 @@
+add_compile_definitions( $ENV{ROS_DISTRO} )
+
 # Kinematics test
 ament_add_gtest(kinematics_test kinematics_test.cpp)
 ament_target_dependencies(kinematics_test
